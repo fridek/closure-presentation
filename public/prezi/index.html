@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <meta name="description" content="Closure Library">
+    <meta name="author" content="Sebastian Poręba">
+
+    <meta charset='utf-8'>
+    <script src='slides.js'></script>
+    <title>Closure Library - Sebastian Poręba</title>
+
+  
+  <style>
+    
+    .prettyprint .red .typ, .prettyprint .red .atn, .prettyprint .red .dec, .prettyprint .red .var {
+      color: #f00 !important;
+    }
+    
+  </style>
+  </head>
+  <body style='display: none'>
+  <script type="text/javascript">
+
+//    var _gaq = _gaq || [];
+//    _gaq.push(['_setAccount', 'UA-17195095-1']);
+//    _gaq.push(['_trackPageview']);
+
+//    (function() {
+//      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+//      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+//      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+//    })();
+
+  </script>
+    <section class='slides layout-regular template-default'>
+
+      <article>
+        <h1>
+          Closure Library, Compiler and Plovr
+        </h1>
+        <p>
+          Sebastian Poręba
+          <br>
+          27th June 2011
+        </p>
+      </article>
+      
+	  <article>
+		<h2>What makes web slow?</h2>
+	  </article>
+	  
+	  <article>
+		<h2>Page load time = code download + code parsing + code execution</h2>
+	  </article>
+	  
+	  <article>
+		<h2>Moore's law doesn't apply to programmers.</h2>
+	  </article>
+	  
+	  <article>
+		Writing fast code requires a lot of effort!</h2>
+	  </article>
+
+	  <article>
+		<h2>JavaScript has its quirks = even more work</h2>
+	  </article>	 
+	  
+	  <article>
+		<h2>How to improve development time and application performance?</h2>
+	  </article>
+	  
+	  <article>
+		<h2>Automated code processing and optimization!</h2>
+		
+		<ul>
+			<li>CoffeeScript</li>
+			<li>LASS, SASS</li>
+			<li>Code minifiers</li>
+			<li>JSLint, JSHint</li>
+			<li>Unit testing</li>
+		</ul>
+	  </article>
+	  
+	  <article>
+		<h2>Google Closure is a complete toolchain for building big, fast applications with less effort</li>
+	  </article>
+
+	  <article>
+		<h1>Closure Compiler</h1>
+	  </article>
+	  
+      <article>
+        <h3>Calcdeps.py scans your project to find all dependiences</h3>
+        <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-1.jpg">
+      </article>
+            
+      <article>
+        <h3>Calcdeps.py scans your project to find all dependiences</h3>
+        <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-2.jpg">
+      </article>
+      
+      <article>
+        <h3>Calcdeps.py scans your project to find all dependiences</h3>
+        <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-3.jpg">
+      </article>
+      
+      <article>
+        <h3>Closure Compiler</h3>
+        <ul class="build">
+          <li>Reads input files and transforms them into abstract representation (graph)</li>
+          <li>Turns graph into an output code</li>
+          <li>Output is a minimal representation considering gzip compression</li>
+          <li>Smaller code improves performance as well</li>
+          <li>Works in three modes: whitespace only, simple and advanced</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Whitespace only mode</h3>
+        Before compilation:
+<pre>
+  var foo = function(bar) {
+    if(bar == ('baz').length) {
+      return "\"" + '\'';
+      } else {
+        return 10000;
+      }
+    }
+  }
+</pre>
+After compilation:
+<pre>
+var foo=function(bar){
+  if(bar=="baz".length)return'"'+"'";
+  else return 1E4
+};
+</pre>
+      </article>
+
+      <article>
+        <h3>Whitespace only mode</h3>
+        <ul>
+          <li>one-line if &rarr; removed curly braces</li>
+          <li>1000 &rarr; 1E4</li>
+          <li>Semicolon at the end of the function &rarr; dropped</li>
+          <li>Minimized strings with escaped quotes</li>
+          <li>Semicolon added after function declaration, safer to concatenate with another file</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Simple mode</h3>
+        Before compilation:
+<pre>
+  var foo = function(bar) {
+    if(bar == ('baz').length) {
+      return "\"" + '\'';
+      } else {
+        return 10000;
+      }
+    }
+  }
+</pre>
+After compilation:
+<pre>
+var foo=function(a){return a==3?"\"'":1E4};
+</pre>
+      </article>
+
+      <article>
+        <h3>Simple mode</h3>
+        <ul>
+          <li>bar &rarr; a</li>
+          <li>if/else &rarr; ?:</li>
+          <li>('baz').length &rarr; 3</li>
+          <li>string literals &rarr; concatenated</li>
+        </ul>
+      </article>      
+      
+      <article>
+        <h3>Advanced mode</h3>
+        Before compilation:
+<pre>
+  var foo = function(bar) {
+    if(bar == ('baz').length) {
+      return "\"" + '\'';
+      } else {
+        return 10000;
+      }
+    }
+  }
+</pre>
+After compilation:
+<div class="build">
+<pre>
+
+
+</pre>
+</div>
+      </article>      
+      
+      <article>
+        <h3>Advanced mode</h3>
+        <ul>
+          <li>Removes dead code</li>
+          <li>Inlines functions</li>
+          <li>Uses comments in JSDoc to detect errors and optimize even further</li>
+          <li>Provides Java API and supports Ant for build process</li> 
+        </ul>
+      </article>
+      
+      <article>
+      <h3>advanced mode - we need to go deeper</h3>
+<pre>
+var COST_PER_VALUE_MENU_ITEM = 0.99;
+var SALES_TAX = .05;
+var DECATHLON_COST = 10 * (1 + SALES_TAX) * COST_PER_VALUE_MENU_ITEM;
+
+var a = function()  { return 1; };
+var b = function(f) { f(); return 42; };
+var c = function()  { return b(a) * SALES_TAX; };
+var d = function(n) { return (n > 0) ? a() : n * d(n - 1); };
+var e = function()  { return [b, c].length; };
+console.log(e());</pre>
+      </article>
+      
+      <article>
+        <h3>advanced mode - we need to go deeper</h3>
+        <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/gcc-advanced-deps.jpg">
+      </article>
+
+      <article>
+        <h3>advanced mode - we need to go deeper</h3>
+        <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/gcc-advanced-deps-optimized.jpg">
+      </article>
+      
+      <article>
+        <h3>advanced mode - we need to go deeper</h3>
+        mid result:
+<pre>
+var SALES_TAX = .05;
+var a = function()  { return 1; };
+var b = function(f) { f(); return 42; };
+var c = function()  { return b(a) * SALES_TAX; };
+var e = function()  { return [b, c].length; };
+console.log(e());</pre>
+
+        final result:
+        <div class="build">
+      <pre>
+console.log(2);      
+</pre>
+        </div>
+
+      </article>  
+      
+	  <article>
+		<h3>Plovr config - simple</h3>
+<pre>
+{
+  "id": "prezentacja",
+  "paths": "src",
+  "externs": [
+    "externs/browser.js"
+  ],
+  "closure-library": "closure/closure/goog/",
+
+  "inputs": "src/start-1.js",
+
+  "mode": "RAW",
+  "level": "VERBOSE",
+
+  "checks": {
+    "deprecated": "ERROR",
+    "checkTypes": "ERROR",
+    "nonStandardJsDocs": "ERROR"
+  }
+}
+</pre>
+	  </article>
+      
+	  <article>
+		<h3>Plovr config - advanced compilation</h3>
+<pre>
+{
+  "id": "prezentacja2",
+  "paths": "src",
+  "externs": [
+    "externs/browser.js"
+  ],
+  "closure-library": "closure/closure/goog/",
+
+  "inputs": "src/start-1.js",
+
+  "mode": "ADVANCED",
+  "level": "QUIET",
+
+  "checks": {
+    "deprecated": "ERROR",
+    "checkTypes": "ERROR",
+    "nonStandardJsDocs": "ERROR"
+  }
+}
+</pre>
+	  </article>
+      
+	  <article>
+		<h3>Plovr config - simple</h3>
+<pre>
+{
+  "id": "prezentacja3",
+  "paths": "src",
+  "externs": [
+    "externs/browser.js"
+  ],
+  "closure-library": "closure/closure/goog/",
+
+  "inputs": "src/start-2.js",
+
+  "soy-function-plugins": "org.plovr.soy.function.PlovrModule",
+
+  "mode": "ADVANCED",
+  "level": "VERBOSE",
+
+  "checks": {
+    "deprecated": "ERROR",
+    "checkTypes": "ERROR",
+    "nonStandardJsDocs": "ERROR"
+  }
+}
+
+</pre>
+	  </article>
+	  
+      <article>
+        <div style="text-align:center">
+          <h1>That's all folks!</h1>
+          <br>
+          <img src="images/smashinglabs.png"><br>
+          <a href="http://www.smashinglabs.pl">www.smashinglabs.pl</a><br>
+          <a href="https://twitter.com/#!/fridek">#fridek</a>
+        </div>
+      </article>   
+    
+      <article>
+        <h2>Questions?</h2>
+      </article>
+  </body>
+</html>

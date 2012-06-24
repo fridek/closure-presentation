@@ -1,0 +1,36 @@
+<?
+$oddeven = true;
+foreach($this->data as $row) {
+    $oddeven = !$oddeven; ?>
+<tr class="<?= $oddeven?'odd':'even'?>">
+    <td><?= $row->name ?></td>
+    <td><?= $row->address ?></td>
+    <td>
+        <a href="<?= $row->www ?>">
+            <img src="<?= $this->baseUrl() ?>/img/icons/icon_vcard.gif" alt="<?= $row->www ?>">
+            <?= $row->www ?>
+        </a>
+    </td>
+    <td>
+        <a href="mailto:<?= $row->email ?>">
+            <img src="<?= $this->baseUrl() ?>/img/icons/icon_mailto.gif" alt="<?= $row->email ?>">
+            <?= $row->email ?>
+        </a>
+    </td>
+    <td><?= $row->leg_count ?></td>
+    <td>
+        <a href="#">
+            <img src="<?= $this->baseUrl() ?>/img/icons/rosette.png" alt="foo">
+        </a>
+        <a href="#">
+            <img src="<?= $this->baseUrl() ?>/img/icons/tick.png" alt="bar">
+        </a>
+        <a href="#">
+            <img src="<?= $this->baseUrl() ?>/img/icons/icon_plugin.gif" alt="baz">
+        </a>
+        <a href="#">
+            <img src="<?= $this->baseUrl() ?>/img/icons/cog.png" alt="bum">
+        </a>
+    </td>
+</tr>
+<? } ?>

@@ -1,0 +1,43 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Prezentacja Closure</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <base href="<?php echo $this->baseUrl(); ?>" />
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="<?= $this->baseUrl('/css/style.css') ?>">
+</head>
+<body>
+    <div class="container">
+        <?= $this->partial("menu.phtml") ?>
+
+        <div>
+            <a href="#" id="next-page">Next page &gt;&gt;</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>WWW</th>
+                        <th>Mail</th>
+                        <th>Leg count</th>
+                    </tr>
+                </thead>
+                <tbody id="table-contents">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="http://localhost:9810/compile?id=prezentacja" type="text/javascript"></script>
+</body>
+</html>

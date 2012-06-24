@@ -1,0 +1,52 @@
+{namespace prezentacja.templates.Table}
+
+/**
+* @param baseUrl
+* @param data
+*/
+{template .table}
+    {foreach $row in $data}
+    <tr class="{if index($row) % 2 == 0}even{else}odd{/if}">
+        {call .renderrow}
+            {param row: $row /}
+            {param baseUrl: $baseUrl /}
+        {/call}
+    </tr>
+    {/foreach}
+{/template}
+
+/**
+* @param baseUrl
+* @param row
+*/
+{template .renderrow private="true"}
+    <td>{$row.name}</td>
+    <td>{$row.address}</td>
+    <td>
+        <a href="{$row.www}">
+            <img src="{$baseUrl}/img/icons/icon_vcard.gif" alt="{$row.www}">
+            {$row.www}
+        </a>
+    </td>
+    <td>
+        <a href="mailto:{$row.email}">
+            <img src="{$baseUrl}/img/icons/icon_mailto.gif" alt="{$row.email}">
+            {$row.email}
+        </a>
+    </td>
+    <td>{$row.leg_count}</td>
+    <td>
+        <a href="#">
+            <img src="{$baseUrl}/img/icons/rosette.png" alt="foo">
+        </a>
+        <a href="#">
+            <img src="{$baseUrl}/img/icons/tick.png" alt="bar">
+        </a>
+        <a href="#">
+            <img src="{$baseUrl}/img/icons/icon_plugin.gif" alt="baz">
+        </a>
+        <a href="#">
+            <img src="{$baseUrl}/img/icons/cog.png" alt="bum">
+        </a>
+    </td>
+{/template}
