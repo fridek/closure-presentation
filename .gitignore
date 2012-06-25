@@ -4,3 +4,4 @@ public/js/externs
 public/js/plovr.jar
 public/js/libs
 .idea
+*.xlsx

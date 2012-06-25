@@ -29,7 +29,7 @@ prezentacja.Loader.prototype.loadNewPageHtml = function(target) {
         target.innerHTML = html;
     });
 
-    xhr_.send('http://localhost/prezentacja_closure/public/index/paginationhtml');
+    xhr_.send('/index/paginationhtml');
 };
 
 prezentacja.Loader.prototype.loadNewPageJSON = function(target) {
@@ -40,13 +40,10 @@ prezentacja.Loader.prototype.loadNewPageJSON = function(target) {
 
         var translated_json = prezentacja.Model.getInstance().importer(json);
 
-        window.console.log(translated_json, json);
-
         target.innerHTML = prezentacja.templates.Table.table({
-            baseUrl: 'http://localhost/prezentacja_closure/public/',
             data: translated_json
         });
     });
 
-    xhr_.send('http://localhost/prezentacja_closure/public/index/paginationjson');
+    xhr_.send('/index/paginationjson');
 };

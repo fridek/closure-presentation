@@ -24,7 +24,8 @@
   
   <style>
     
-    .prettyprint .red .typ, .prettyprint .red .atn, .prettyprint .red .dec, .prettyprint .red .var {
+    .prettyprint .red .typ, .prettyprint .red .atn, .prettyprint .red .dec, .prettyprint .red .kwd,
+    .prettyprint .red .var, .prettyprint .red .str, .prettyprint .red .pun, .prettyprint .red .pln {
       color: #f00 !important;
     }
     
@@ -70,7 +71,7 @@
 	  </article>
 	  
 	  <article>
-		Writing fast code requires a lot of effort!</h2>
+          <h2>Writing fast code requires a lot of effort!</h2>
 	  </article>
 
 	  <article>
@@ -100,172 +101,168 @@
 	  <article>
 		<h1>Closure Compiler</h1>
 	  </article>
-	  
+
       <article>
-        <h3>Calcdeps.py scans your project to find all dependiences</h3>
+        <h3>Easy modules</h3>
+
+<pre>
+    goog.provide('my.delicious.Cookie');
+</pre>
+
+<pre>
+    goog.require('goog.dom');
+    goog.require('goog.net.xhrio');
+</pre>
+      </article>
+
+      <article>
+        <h3>closurebuilder.py scans your project to find all dependiences</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-1.jpg">
       </article>
             
       <article>
-        <h3>Calcdeps.py scans your project to find all dependiences</h3>
+        <h3>closurebuilder.py scans your project to find all dependiences</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-2.jpg">
       </article>
       
       <article>
-        <h3>Calcdeps.py scans your project to find all dependiences</h3>
+        <h3>closurebuilder.py scans your project to find all dependiences</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-3.jpg">
       </article>
-      
-      <article>
-        <h3>Closure Compiler</h3>
-        <ul class="build">
-          <li>Reads input files and transforms them into abstract representation (graph)</li>
-          <li>Turns graph into an output code</li>
-          <li>Output is a minimal representation considering gzip compression</li>
-          <li>Smaller code improves performance as well</li>
-          <li>Works in three modes: whitespace only, simple and advanced</li>
-        </ul>
-      </article>
-      
-      <article>
-        <h3>Whitespace only mode</h3>
-        Before compilation:
-<pre>
-  var foo = function(bar) {
-    if(bar == ('baz').length) {
-      return "\"" + '\'';
-      } else {
-        return 10000;
-      }
-    }
-  }
-</pre>
-After compilation:
-<pre>
-var foo=function(bar){
-  if(bar=="baz".length)return'"'+"'";
-  else return 1E4
-};
-</pre>
-      </article>
 
       <article>
-        <h3>Whitespace only mode</h3>
-        <ul>
-          <li>one-line if &rarr; removed curly braces</li>
-          <li>1000 &rarr; 1E4</li>
-          <li>Semicolon at the end of the function &rarr; dropped</li>
-          <li>Minimized strings with escaped quotes</li>
-          <li>Semicolon added after function declaration, safer to concatenate with another file</li>
-        </ul>
-      </article>
-      
-      <article>
-        <h3>Simple mode</h3>
-        Before compilation:
-<pre>
-  var foo = function(bar) {
-    if(bar == ('baz').length) {
-      return "\"" + '\'';
-      } else {
-        return 10000;
-      }
-    }
-  }
-</pre>
-After compilation:
-<pre>
-var foo=function(a){return a==3?"\"'":1E4};
-</pre>
-      </article>
-
-      <article>
-        <h3>Simple mode</h3>
-        <ul>
-          <li>bar &rarr; a</li>
-          <li>if/else &rarr; ?:</li>
-          <li>('baz').length &rarr; 3</li>
-          <li>string literals &rarr; concatenated</li>
-        </ul>
-      </article>      
-      
-      <article>
-        <h3>Advanced mode</h3>
-        Before compilation:
-<pre>
-  var foo = function(bar) {
-    if(bar == ('baz').length) {
-      return "\"" + '\'';
-      } else {
-        return 10000;
-      }
-    }
-  }
-</pre>
-After compilation:
-<div class="build">
-<pre>
-
-
-</pre>
-</div>
-      </article>      
-      
-      <article>
-        <h3>Advanced mode</h3>
-        <ul>
-          <li>Removes dead code</li>
-          <li>Inlines functions</li>
-          <li>Uses comments in JSDoc to detect errors and optimize even further</li>
-          <li>Provides Java API and supports Ant for build process</li> 
-        </ul>
-      </article>
-      
-      <article>
-      <h3>advanced mode - we need to go deeper</h3>
-<pre>
-var COST_PER_VALUE_MENU_ITEM = 0.99;
-var SALES_TAX = .05;
-var DECATHLON_COST = 10 * (1 + SALES_TAX) * COST_PER_VALUE_MENU_ITEM;
-
-var a = function()  { return 1; };
-var b = function(f) { f(); return 42; };
-var c = function()  { return b(a) * SALES_TAX; };
-var d = function(n) { return (n > 0) ? a() : n * d(n - 1); };
-var e = function()  { return [b, c].length; };
-console.log(e());</pre>
-      </article>
-      
-      <article>
-        <h3>advanced mode - we need to go deeper</h3>
+        <h3>treeshaking</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/gcc-advanced-deps.jpg">
       </article>
 
       <article>
-        <h3>advanced mode - we need to go deeper</h3>
+        <h3>treeshaking</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/gcc-advanced-deps-optimized.jpg">
       </article>
-      
+
       <article>
-        <h3>advanced mode - we need to go deeper</h3>
-        mid result:
+          <h2>The Closure Way - use as bloated structure as it suits you, then optimize like crazy</h2>
+      </article>
+
+      <article>
+          <h2>Is it hard to configure?</h2>
+      </article>
+
+      <article>
+          <h2>Demo time!</h2>
+      </article>
+
+      <article>
+          <h3>No JS demo</h3>
+
+          First load:
+          <ul>
+              <li>JS - 0kB/0ms</li>
+              <li>HTML - 216kB/600ms</li>
+          </ul>
+
+          Page load:
+          <ul>
+              <li>JS - 0kB/0ms</li>
+              <li>HTML - 216kB/600ms</li>
+          </ul>
+      </article>
+
+      <article>
+          <h3>jQuery pagination demo</h3>
+
+          First load:
+          <ul>
+              <li>JS - 93kB/920ms</li>
+              <li>HTML - 3+215kB/700ms</li>
+          </ul>
+
+          Page load:
+          <ul>
+              <li>HTML - 215kB/350ms</li>
+          </ul>
+      </article>
+
+      <article>
+          <h3>jQuery pagination demo</h3>
 <pre>
-var SALES_TAX = .05;
-var a = function()  { return 1; };
-var b = function(f) { f(); return 42; };
-var c = function()  { return b(a) * SALES_TAX; };
-var e = function()  { return [b, c].length; };
-console.log(e());</pre>
-
-        final result:
-        <div class="build">
-      <pre>
-console.log(2);      
+$(document).ready(function() {
+    var loaddata = function(e) {
+        $('#table-contents').load('/index/paginationhtml');
+        if(e) {
+            e.preventDefault();
+        }
+        return false;
+    };
+    $('#next-page').click(loaddata);
+    loaddata();
+});
 </pre>
-        </div>
+      </article>
 
-      </article>  
-      
+      <article>
+          <h3>Google Closure pagination demo</h3>
+
+          First load:
+          <ul>
+              <li>JS - 910kB/8500ms</li>
+              <li>HTML - 3+215kB/700ms</li>
+          </ul>
+
+          Page load:
+          <ul>
+              <li>HTML - 215kB/350ms</li>
+          </ul>
+      </article>
+
+      <article>
+          <h3>Google Closure pagination demo</h3>
+
+<pre>
+/**
+ * @constructor
+ */
+prezentacja.Start1 = function() {
+var button = goog.dom.getElement('next-page');
+var table = goog.dom.getElement('table-contents');
+
+/**
+ * @type {prezentacja.Loader}
+ * @private
+ */
+this.loader_ = new prezentacja.Loader();
+
+goog.events.listen(button, goog.events.EventType.CLICK, function(e) {
+    this.loader_.loadNewPageHtml(table);
+    e.preventDefault();
+}, false, this);
+
+this.loader_.loadNewPageHtml(table);
+};
+</pre>
+      </article>
+      <article>
+          <h3>Google Closure pagination demo</h3>
+
+<pre>
+/**
+ * @constructor
+ */
+prezentacja.Loader = function() {};
+
+prezentacja.Loader.prototype.loadNewPageHtml = function(target) {
+var xhr_ = new goog.net.XhrIo();
+
+goog.events.listen(xhr_, goog.net.EventType.COMPLETE, function(e) {
+    var html = this.getResponseText();
+    target.innerHTML = html;
+});
+
+xhr_.send('/index/paginationhtml');
+};
+</pre>
+      </article>
+
 	  <article>
 		<h3>Plovr config - simple</h3>
 <pre>
@@ -290,8 +287,28 @@ console.log(2);
 }
 </pre>
 	  </article>
-      
-	  <article>
+
+
+      <article>
+          <h3>Google Closure compiled pagination demo</h3>
+
+          First load:
+          <ul>
+              <li class="red">JS - 19kB/350ms</li>
+              <li>HTML - 3+215kB/700ms</li>
+          </ul>
+
+          Page load:
+          <ul>
+              <li>HTML - 215kB/350ms</li>
+          </ul>
+      </article>
+
+      <article>
+          <h2>So much better than jQuery!</h2>
+      </article>
+
+      <article>
 		<h3>Plovr config - advanced compilation</h3>
 <pre>
 {
@@ -303,10 +320,10 @@ console.log(2);
   "closure-library": "closure/closure/goog/",
 
   "inputs": "src/start-1.js",
-
+<span class="red">
   "mode": "ADVANCED",
   "level": "QUIET",
-
+</span>
   "checks": {
     "deprecated": "ERROR",
     "checkTypes": "ERROR",
@@ -315,7 +332,137 @@ console.log(2);
 }
 </pre>
 	  </article>
-      
+
+
+      <article>
+          <h3>Google Closure compiled + soy demo</h3>
+
+          First load:
+          <ul>
+              <li>JS - 21kB/270ms</li>
+              <li>JSON - 38kB/300ms</li>
+              <li>HTML - 3/470ms</li>
+          </ul>
+
+          Page load:
+          <ul>
+              <li class="red">JSON - 38kB/300ms</li>
+          </ul>
+      </article>
+
+      <article>
+          <h3>Google Closure compiled + soy demo</h3>
+
+<pre>
+prezentacja.Loader.prototype.loadNewPageJSON = function(target) {
+var xhr_ = new goog.net.XhrIo();
+
+goog.events.listen(xhr_, goog.net.EventType.COMPLETE, function(e) {
+var json = this.getResponseJson();
+<span class="red">
+var translated_json = prezentacja.Model.getInstance().importer(json);
+</span>
+target.innerHTML = prezentacja.templates.Table.table({
+    data: translated_json
+});
+});
+
+xhr_.send('/index/paginationjson');
+};
+</pre>
+      </article>
+
+      <article>
+          <h3>Google Closure compiled + soy demo</h3>
+
+<pre>
+/**
+* @param {Array.<Array>} rawData
+* @return {Array.<{name: string, address: string, www: string,
+* email: string, leg_count: number}>}
+*/
+prezentacja.Model.prototype.importer = function(rawData) {
+    var result = [];
+    for(var i = 0; i < rawData.length; i++) {
+        result[i] = {
+            name: rawData[i]["name"],
+            address: rawData[i]["address"],
+            www: rawData[i]["www"],
+            email: rawData[i]["email"],
+            leg_count: parseInt(rawData[i]["leg_count"], 10)
+        };
+    }
+    return result;
+};
+</pre>
+      </article>
+
+
+      <article>
+          <h3>Google Closure compiled + soy demo</h3>
+
+<pre>
+prezentacja.Loader.prototype.loadNewPageJSON = function(target) {
+var xhr_ = new goog.net.XhrIo();
+
+goog.events.listen(xhr_, goog.net.EventType.COMPLETE, function(e) {
+var json = this.getResponseJson();
+
+var translated_json = prezentacja.Model.getInstance().importer(json);
+<span class="red">
+target.innerHTML = prezentacja.templates.Table.table({
+    data: translated_json
+});
+</span>
+});
+
+xhr_.send('/index/paginationjson');
+};
+</pre>
+      </article>
+
+      <article>
+          <h3>Google Closure compiled + soy demo</h3>
+
+<pre>
+{namespace prezentacja.templates.Table}
+
+/**
+* @param data
+*/
+{template .table}
+    {foreach $row in $data}
+    &lt;tr class="{if index($row) % 2 == 0}even{else}odd{/if}"&gt;
+        {call .renderrow}
+        {param row: $row /}
+        {/call}
+    &lt;/tr&gt;
+    {/foreach}
+{/template}
+</pre>
+      </article>
+
+
+      <article>
+          <h3>Google Closure compiled + soy demo</h3>
+<pre>
+/**
+* @param row
+*/
+{template .renderrow private="true"}
+    &lt;td&gt;{$row.name}&lt;/td&gt;
+    &lt;td&gt;{$row.address}&lt;/td&gt;
+    &lt;td&gt;
+        &lt;a href="{$row.www}"&gt;
+            &lt;img src="/img/icons/icon_vcard.gif" alt="{$row.www}"&gt;
+            {$row.www}
+        &lt;/a&gt;
+    &lt;/td&gt;
+    ...
+{/template}
+</pre>
+      </article>
+
 	  <article>
 		<h3>Plovr config - simple</h3>
 <pre>
@@ -328,9 +475,9 @@ console.log(2);
   "closure-library": "closure/closure/goog/",
 
   "inputs": "src/start-2.js",
-
+<span class="red">
   "soy-function-plugins": "org.plovr.soy.function.PlovrModule",
-
+</span>
   "mode": "ADVANCED",
   "level": "VERBOSE",
 
@@ -343,7 +490,27 @@ console.log(2);
 
 </pre>
 	  </article>
-	  
+
+      <article>
+          <h3>Everyone loves charts!</h3>
+          <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/total_initial_size.png">
+      </article>
+
+      <article>
+          <h3>Everyone loves charts!</h3>
+          <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/total_initial_time.png">
+      </article>
+
+      <article>
+          <h3>Everyone loves charts!</h3>
+          <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/total_page_size.png">
+      </article>
+
+      <article>
+          <h3>Everyone loves charts!</h3>
+          <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/total_page_time.png">
+      </article>
+
       <article>
         <div style="text-align:center">
           <h1>That's all folks!</h1>
