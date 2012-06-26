@@ -28,7 +28,11 @@
     .prettyprint .red .var, .prettyprint .red .str, .prettyprint .red .pun, .prettyprint .red .pln {
       color: #f00 !important;
     }
-    
+
+    a.red {
+        color: #f00 !important;
+    }
+
   </style>
   </head>
   <body style='display: none'>
@@ -54,7 +58,7 @@
         <p>
           Sebastian Poręba
           <br>
-          27th June 2011
+          28th June 2011
         </p>
       </article>
       
@@ -116,27 +120,27 @@
       </article>
 
       <article>
-        <h3>closurebuilder.py scans your project to find all dependiences</h3>
+        <h3>closurebuilder.py - concat all required files</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-1.jpg">
       </article>
             
       <article>
-        <h3>closurebuilder.py scans your project to find all dependiences</h3>
+        <h3>closurebuilder.py - concat all required files</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-2.jpg">
       </article>
       
       <article>
-        <h3>closurebuilder.py scans your project to find all dependiences</h3>
+        <h3>closurebuilder.py - concat all required files</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 80%;" src="images/calcdeps-3.jpg">
       </article>
 
       <article>
-        <h3>treeshaking</h3>
+        <h3>Compiler - remove unused function and variables</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/gcc-advanced-deps.jpg">
       </article>
 
       <article>
-        <h3>treeshaking</h3>
+        <h3>Compiler - remove unused function and variables</h3>
         <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/gcc-advanced-deps-optimized.jpg">
       </article>
 
@@ -150,6 +154,15 @@
 
       <article>
           <h2>Demo time!</h2>
+      </article>
+
+<!-- demo 1 no js -->
+
+
+      <article>
+          <h3>No JS demo</h3>
+
+          <a href="index/nojs">Click here!</a>
       </article>
 
       <article>
@@ -166,6 +179,17 @@
               <li>JS - 0kB/0ms</li>
               <li>HTML - 216kB/600ms</li>
           </ul>
+      </article>
+
+      <!-- demo 2 jQuery pagination demo -->
+
+
+      <article>
+          <h3>jQuery pagination demo</h3>
+
+          Static HTML sucks!<br>Lets add jQuery and create AJAX pagination.<br>
+
+          <a href="/index/jquerypagination">Click here!</a>
       </article>
 
       <article>
@@ -200,12 +224,23 @@ $(document).ready(function() {
 </pre>
       </article>
 
+      <!-- demo 2 Google Closure pagination demo -->
+
+
+      <article>
+          <h3>Google Closure pagination demo</h3>
+
+          Replace jQuery with Google Closure<br>
+
+          <a href="/index/closurepagination">Click here!</a>
+      </article>
+
       <article>
           <h3>Google Closure pagination demo</h3>
 
           First load:
           <ul>
-              <li>JS - 910kB/8500ms</li>
+              <li>JS - 910kB/8500ms <span class="red">WTF?</span></li>
               <li>HTML - 3+215kB/700ms</li>
           </ul>
 
@@ -269,10 +304,6 @@ xhr_.send('/index/paginationhtml');
 {
   "id": "prezentacja",
   "paths": "src",
-  "externs": [
-    "externs/browser.js"
-  ],
-  "closure-library": "closure/closure/goog/",
 
   "inputs": "src/start-1.js",
 
@@ -288,13 +319,39 @@ xhr_.send('/index/paginationhtml');
 </pre>
 	  </article>
 
+      <article>
+          <h3>How to run plovr?</h3>
+          Serve mode:
+<pre>
+java -jar plovr.jar serve config1.js config2.js config3.js
+</pre>
+          Build mode:
+<pre>
+java -jar plovr.jar build config1.js
+</pre>
+
+      <a href="http://localhost:9810">Demo plovr</a>
+
+      </article>
+
+      <!-- demo 3 Google Closure compiled pagination demo -->
+
+
+      <article>
+          <h3>Google Closure compiled pagination demo</h3>
+
+          Switch compilation mode to advanced!<br>
+
+          <a href="/index/closurecompilation">Click here!</a>
+      </article>
+
 
       <article>
           <h3>Google Closure compiled pagination demo</h3>
 
           First load:
           <ul>
-              <li class="red">JS - 19kB/350ms</li>
+              <li class="red">JS - 19kB/350ms (98% reduction!)</li>
               <li>HTML - 3+215kB/700ms</li>
           </ul>
 
@@ -309,17 +366,17 @@ xhr_.send('/index/paginationhtml');
       </article>
 
       <article>
+          <h2>Usually expect code size reduction around 70-80%</h2>
+      </article>
+
+      <article>
 		<h3>Plovr config - advanced compilation</h3>
 <pre>
 {
   "id": "prezentacja2",
   "paths": "src",
-  "externs": [
-    "externs/browser.js"
-  ],
-  "closure-library": "closure/closure/goog/",
-
   "inputs": "src/start-1.js",
+
 <span class="red">
   "mode": "ADVANCED",
   "level": "QUIET",
@@ -333,6 +390,17 @@ xhr_.send('/index/paginationhtml');
 </pre>
 	  </article>
 
+
+      <!-- demo 4 Google Closure Soy demo -->
+
+
+      <article>
+          <h3>Google Closure compiled + soy demo</h3>
+
+          HTML is so bloated! Lets send JSON instead.<br>
+
+          <a href="/index/templates">Click here!</a>
+      </article>
 
       <article>
           <h3>Google Closure compiled + soy demo</h3>
@@ -397,6 +465,18 @@ prezentacja.Model.prototype.importer = function(rawData) {
 </pre>
       </article>
 
+      <article>
+          <h2>
+              Compiled code = compiled names.<br>
+              JSON comes from server and is not compiled!
+          </h2>
+      </article>
+
+      <article>
+          <h2>
+              Write JSON importers to keep your code consistent. It's also a great server API documentation.
+          </h2>
+      </article>
 
       <article>
           <h3>Google Closure compiled + soy demo</h3>
@@ -463,6 +543,10 @@ xhr_.send('/index/paginationjson');
 </pre>
       </article>
 
+      <article>
+          <h2>Soy templates work with JavaScript and Java.</h2>
+      </article>
+
 	  <article>
 		<h3>Plovr config - simple</h3>
 <pre>
@@ -509,6 +593,105 @@ xhr_.send('/index/paginationjson');
       <article>
           <h3>Everyone loves charts!</h3>
           <img class="centered big" style="margin-top: 50px !important; height: 50%;" src="images/total_page_time.png">
+      </article>
+
+      <article>
+          <h2>We don't have time to show...</h2>
+      </article>
+
+      <article>
+          <h3>Closure Linter</h3>
+<pre>
+gjslint path/to/my/file.js
+
+Line 46, E:0110: Line too long (87 characters).
+Line 54, E:0214: Missing description in @return tag
+Line 66, E:0012: Illegal semicolon after function declaration
+Line 150, E:0120: Binary operator should go on previous line "+"
+Line 175, E:0011: Missing semicolon after function assigned to a variable
+Line 210, E:0121: Illegal comma at end of array literal
+Line 220, E:0002: Missing space before ":"
+</pre>
+      </article>
+
+      <article>
+          <h3>Closure Stylesheets</h3>
+          Variables:
+<pre>
+@def BG_COLOR              rgb(235, 239, 249);
+@def DIALOG_BORDER_COLOR   rgb(107, 144, 218);
+@def DIALOG_BG_COLOR       BG_COLOR;
+
+body {
+  background-color: BG_COLOR;
+}
+
+.dialog {
+  background-color: DIALOG_BG_COLOR;
+  border: 1px solid DIALOG_BORDER_COLOR;
+}
+</pre>
+
+      </article>
+
+      <article>
+          <h3>Closure Stylesheets</h3>
+          Functions:
+<pre>
+@def LEFT_HAND_NAV_WIDTH    180px;
+@def LEFT_HAND_NAV_PADDING  3px;
+
+.left_hand_nav {
+  position: absolute;
+  width: LEFT_HAND_NAV_WIDTH;
+  padding: LEFT_HAND_NAV_PADDING;
+}
+
+.content {
+  position: absolute;
+  margin-left: add(LEFT_HAND_NAV_PADDING,  /* padding left */
+                   LEFT_HAND_NAV_WIDTH,
+                   LEFT_HAND_NAV_PADDING); /* padding right */
+}
+</pre>
+
+      </article>
+
+      <article>
+          <h3>Closure Stylesheets - renaming!</h3>
+          In JS:
+<pre>
+var element = goog.dom.getElementByClass(
+    <span class="red">goog.getCssName('dialog-content')</span>
+    );
+</pre>
+          In CSS:
+<pre>
+{template .dialog}
+&lt;div class="<span class="red">{css dialog-content}</span>"&gt;
+&lt;div class="{css dialog-title}">{$title}&lt;/title&gt;
+    {call .content data="all" /}
+&lt;/div&gt;
+{/template}
+</pre>
+
+      </article>
+
+      <article>
+          <h3>Links</h3>
+
+          <ul>
+              <li><a href="http://plovr.com">Plovr website (do not build your own binary...)</a></li>
+              <li><a href="https://developers.google.com/closure/">Google Closure</a></li>
+              <li><a href="http://closure-library.googlecode.com/svn/trunk/closure/goog/demos/index.html">Closure Library UI demos</a></li>
+              <li><a href="http://code.google.com/p/my-gae-template-py27/" class="red">Makefiles for Closure and GAE</a></li>
+              <li><a href="http://www.limejs.com/">LimeJS game engine built with Closure and WebGL</a></li>
+              <li><a href="http://jasongoemaat.blogspot.com/2011/07/building-plovr-on-windows.html">Building Plovr on Windows</a></li>
+              <li><a href="https://groups.google.com/forum/?fromgroups#!topic/plovr/2amxkQXvMso">Plovr and Closure Stylesheets</a></li>
+              <li><a href="http://www.normalesup.org/~simonet/soft/ow/eclipse-closure-javascript.en.html">Eclipse :-( plugin</a></li>
+              <li><a href="http://plugins.intellij.net/plugin/?id=5830">IDEA Intellij :-) plugin</a></li>
+          </ul>
+
       </article>
 
       <article>
